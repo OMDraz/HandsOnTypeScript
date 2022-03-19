@@ -9,7 +9,7 @@ class Speaker {
         return this.message 
     }
 
-    set Message() {
+    set Message(val: string) {
         let tmpMessage = val;
         if(!val.includes(this.name)){
             tmpMessage = this.name + " " + val;
