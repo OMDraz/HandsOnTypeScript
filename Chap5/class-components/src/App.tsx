@@ -1,22 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import Greeting from './Greeting';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import Greeting from "./GreetingFunctional";
+import "./App.css";
 
 class App extends React.Component {
-  constructor(props:any) {
+  constructor(props: any) {
     super(props);
     this.state = {
-      enteredName: ""
-    }
+      enteredName: "",
+      message: "",
+    };
     this.onChangeName = this.onChangeName.bind(this);
   }
-  state: { enteredName: string }
+  state: { enteredName: string; message: string };
   onChangeName(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
-      enteredName: e.target.value
+      enteredName: e.target.value,
+      message: `Hello from, ${e.target.value}`,
     });
-  };
+  }
 
   render() {
     console.log("rendering App");
@@ -24,13 +26,12 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <input value={this.state.enteredName}
-                onChange={this.onChangeName} />
-            <Greeting name={this.state.enteredName} />
+          <img src={logo} className="App-logo" alt="logo" />
+          <input value={this.state.enteredName} onChange={this.onChangeName} />
+          <Greeting message={this.state.message} />
         </header>
       </div>
-    )
+    );
   }
 }
 
