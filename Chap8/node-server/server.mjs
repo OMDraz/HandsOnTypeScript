@@ -1,10 +1,5 @@
 import http from "http";
 
-// const server = http.createServer((req, res) => {
-//   console.log(req);
-//   res.end("hello world");
-// });
-
 const server = http.createServer((req, res) => {
   if (req.url === "/") {
     res.end("hello world");
