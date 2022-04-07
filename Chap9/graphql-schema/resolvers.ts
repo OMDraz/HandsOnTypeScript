@@ -14,7 +14,7 @@ interface Todo {
     description?: string;
 }
 
-const resovlers: IResolvers = {
+const resolvers: IResolvers = {
     Query: {
         getUser: async (
             obj: any,
@@ -23,13 +23,36 @@ const resovlers: IResolvers = {
             },
             ctx: GqlContext,
             info: any
-        ): Promixe<User> => {
+        ): Promise<User> => {
             return {
                 id: v4(),
                 username: "dave",
             };
         },
+        getTodos: async (
+            parent: any,
+            args: null,
+            ctx: GqlContext,
+            info: any
+          ): Promise<Array<Todo>> => {
+            return [
+              {
+                id: v4(),
+                title: "First todo",
+                description: "First todo description",
+              },
+              {
+                id: v4(),
+                title: "Second todo",
+                description: "Second todo description",
+              },
+              {
+                id: v4(),
+                title: "Third todo",
+              },
+            ];
+          },
     }
 }
 
-//finished at this line GqlContext
+export default resolvers;
