@@ -16,5 +16,8 @@ const typeDefs = (0, apollo_server_express_1.gql) `
     getUser(id: ID): User
     getTodos: [Todo!]
   }
+  type Mutation {
+    addTodo(title: String!, description: String): Todo
+  }
 `;
 exports.default = typeDefs;

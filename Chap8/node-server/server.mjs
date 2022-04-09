@@ -15,7 +15,7 @@ const server = http.createServer((req, res) => {
     req.on("end", () => {
       const params = Buffer.concat(body);
       console.log("body", params.toString());
-      res.end(`You submitted these paramteres: ${params.toString()}`);
+      res.end(`You submitted these parameters: ${params.toString()}`);
     });
   } else {
     res.end("good bye");
