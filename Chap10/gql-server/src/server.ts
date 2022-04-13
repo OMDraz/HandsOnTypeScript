@@ -1,4 +1,5 @@
 import express from "express";
+<<<<<<< HEAD
 import { createServer } from "http";
 import { makeExecutableSchema } from '@graphql-tools/schema'
 import {
@@ -9,6 +10,11 @@ import typeDefs from "./typeDefs";
 import resolvers from "./resolvers";
 import { applyMiddleware } from "graphql-middleware";
 import { log } from "./Logger";
+=======
+import { ApolloServer } from 'apollo-server-express';
+import typeDefs from "./typeDefs";
+import resolvers from "./resolvers";
+>>>>>>> efb60b5ba318ea79afa9b17c06eb55420dda5343
 
 
 async function startApolloServer(typeDefs: any, resolvers: any) {
