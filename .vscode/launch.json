@@ -11,7 +11,10 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/Chap8/node-server/server.mjs"
+            "program": "${workspaceFolder}/Chap8/node-server/server.mjs",
+            "runtimeExecutable": "nodemon",
+            "restart": true,
+            "console": "integratedTerminal"
         }
     ]
 }
