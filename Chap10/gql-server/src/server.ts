@@ -1,32 +1,37 @@
 import express from "express";
-<<<<<<< HEAD
 import { createServer } from "http";
-import { makeExecutableSchema } from '@graphql-tools/schema'
 import {
   ApolloServer,
-  PubSub,
+  makeExecutableSchema,
 } from "apollo-server-express";
-import typeDefs from "./typeDefs";
-import resolvers from "./resolvers";
 import { applyMiddleware } from "graphql-middleware";
 import { log } from "./Logger";
-=======
-import { ApolloServer } from 'apollo-server-express';
 import typeDefs from "./typeDefs";
 import resolvers from "./resolvers";
->>>>>>> efb60b5ba318ea79afa9b17c06eb55420dda5343
+import { PubSub } from 'graphql-subscriptions';
+
 
 
 async function startApolloServer(typeDefs: any, resolvers: any) {
-  // Same ApolloServer initialization as before
-  const server = new ApolloServer({ typeDefs, resolvers });
+  const app = express();
+  const pubsub = new PubSub();
+
+  const schema = makeExecutableSchema({
+    typeDefs, resolvers
+  });
+
+  const schemaWithMiddleWare = applyMiddleware(schema, log); 
+
+  const apolloServer = new ApolloServer({
+    schema: schemaWithMiddleWare,
+    context: ({ req, res }: any) => ({ req, res, pubsub }),
+  });
 
   // Required logic for integrating with Express
-  await server.start();
+  await apolloServer.start();
 
-  const app = express();
 
-  server.applyMiddleware({
+  apolloServer.applyMiddleware({
      app,
 
      // By default, apollo-server hosts its GraphQL endpoint at the
@@ -39,7 +44,7 @@ async function startApolloServer(typeDefs: any, resolvers: any) {
   await new Promise<void>(resolve => {
       return app.listen({ port: 8000 }, resolve);
   });
-  console.log(`🚀 Server ready at http://localhost:8000${server.graphqlPath}`);
+  console.log(`🚀 Server ready at http://localhost:8000${apolloServer.graphqlPath}`);
 }
 
 startApolloServer(typeDefs, resolvers);
